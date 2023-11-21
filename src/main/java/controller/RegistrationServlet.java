@@ -4,16 +4,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import model.UserReg;
-import model.UserRegDao;
+import DAO.UserRegDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 
 public class RegistrationServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.getRequestDispatcher("registration.jsp").forward(request,response);
+        request.getRequestDispatcher("registration.ftl").forward(request,response);
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String fullname = request.getParameter("username");
@@ -33,10 +31,9 @@ public class RegistrationServlet extends HttpServlet {
         String userRegStatus = userRegDao.sendUserToDb(userReg);
         if(userRegStatus.equals("SUCCESS")){
             response.sendRedirect(request.getContextPath() + "/login");
-        }else{
-            HttpSession session = request.getSession();
-            session.setAttribute("message", "Ошибка при регистрации!");
-            request.getRequestDispatcher("registration.jsp").forward(request,response);
+        }else if(userRegStatus.equals("User with the same email already exists") || userRegStatus.equals("User with the same login already exists")){
+            request.setAttribute("error", "Пользователь с таким логином или почтой существует");
+            request.getRequestDispatcher("registration.ftl").forward(request,response);
         }
     }
 }

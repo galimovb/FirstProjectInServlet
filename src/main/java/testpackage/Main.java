@@ -1,16 +1,11 @@
 package testpackage;
 
-import model.UserLog;
-import repository.DBConnection;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import DAO.ProfileDao;
+import model.ProfileData;
 
 public class Main {
     public static void main(String[] args) {
-        UserLog userLog = new UserLog();
+        /*UserLog userLog = new UserLog();
         userLog.setLogin("bulka");
         userLog.setPassword("123");
         String login=userLog.getLogin();
@@ -43,6 +38,13 @@ public class Main {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
+        }*/
+        String userLogin = "bulka";
+        ProfileDao profileDao = new ProfileDao();
+        ProfileData profileData = profileDao.pullDataUsers(userLogin);
+        System.out.println(profileData.getId());
+        System.out.println(profileData.getLogin());
+        System.out.println(profileData.getFullName());
+        System.out.println(profileData.getPassword());
     }
 }
