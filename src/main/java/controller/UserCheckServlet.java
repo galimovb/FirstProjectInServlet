@@ -34,7 +34,7 @@ public class UserCheckServlet extends HttpServlet {
             ProfileData profileData = profileDao.pullDataUsers(userLogin);
             session.setAttribute("profiles",profileData);
 
-            response.sendRedirect(request.getContextPath()+ "/profile.ftl");
+            response.sendRedirect(request.getContextPath()+ "/homePage");
         }else if(userExtractStatus.equals("НЕПРАВИЛЬНЫЙ ПАРОЛЬ")){
             request.setAttribute("message", "Неправильный пароль");
             request.getRequestDispatcher("login.ftl").forward(request, response);

@@ -1,6 +1,9 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <style>
 
         .container {
@@ -53,7 +56,7 @@
 <body>
 <div class="container">
     <h2 style="text-align: center">Create a New Comment</h2>
-    <form action="/create-comment" method="post">
+    <form action="newComment" method="post">
         <div class="form-group">
             <label for="comment">Comment:</label>
             <textarea id="comment" name="comment" placeholder="Enter your comment" required></textarea>

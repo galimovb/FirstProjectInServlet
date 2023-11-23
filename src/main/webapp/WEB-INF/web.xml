@@ -47,6 +47,42 @@
     <url-pattern>/profile</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>createPost</servlet-name>
+    <servlet-class>controller.NewPostServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createPost</servlet-name>
+    <url-pattern>/createPost</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>homePage</servlet-name>
+    <servlet-class>controller.HomePageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>homePage</servlet-name>
+    <url-pattern>/homePage</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>commentPage</servlet-name>
+    <servlet-class>controller.CommentPageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>commentPage</servlet-name>
+    <url-pattern>/commentPage</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>newComment</servlet-name>
+    <servlet-class>controller.NewCommentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>newComment</servlet-name>
+    <url-pattern>/newComment</url-pattern>
+  </servlet-mapping>
+
 
 
   <servlet>
