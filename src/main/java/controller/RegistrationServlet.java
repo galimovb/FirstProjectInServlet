@@ -8,7 +8,13 @@ import model.UserReg;
 import DAO.UserRegDao;
 import java.io.IOException;
 
+//register
 
+/*
+Сервлет отображает страницу регистрации
+и после успешной проверки данных сохраняет данные зареганного пользователя в бд и редиректит на страницу аутентификации
+если пользователь уже существует, выводится ошибочка
+*/
 public class RegistrationServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.getRequestDispatcher("registration.ftl").forward(request,response);
@@ -29,6 +35,7 @@ public class RegistrationServlet extends HttpServlet {
         UserRegDao userRegDao = new UserRegDao();
         response.setContentType("text/html");
         String userRegStatus = userRegDao.sendUserToDb(userReg);
+
         if(userRegStatus.equals("SUCCESS")){
             response.sendRedirect(request.getContextPath() + "/login");
         }else if(userRegStatus.equals("User with the same email already exists") || userRegStatus.equals("User with the same login already exists")){

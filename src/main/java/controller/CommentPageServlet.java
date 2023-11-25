@@ -39,10 +39,10 @@ public class CommentPageServlet extends HttpServlet {
         CommentDao commentDao = new CommentDao();
         List<Comment> comments = commentDao.findAllComments(postId);
         request.setAttribute("comments",comments);
+
         request.getRequestDispatcher("comments.ftl").forward(request,response);
 
     }
-    public void doPost(HttpServletRequest request, HttpServletResponse response){
-    }
+
 
 }

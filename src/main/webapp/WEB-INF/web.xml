@@ -11,6 +11,7 @@
     <welcome-file>login.ftl</welcome-file>
   </welcome-file-list>
 
+
   <servlet>
     <servlet-name>register</servlet-name>
     <servlet-class>controller.RegistrationServlet</servlet-class>
@@ -81,6 +82,24 @@
   <servlet-mapping>
     <servlet-name>newComment</servlet-name>
     <url-pattern>/newComment</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>myPost</servlet-name>
+    <servlet-class>controller.MyPostPageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>myPost</servlet-name>
+    <url-pattern>/myPost</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>deletePost</servlet-name>
+    <servlet-class>controller.DeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deletePost</servlet-name>
+    <url-pattern>/deletePost</url-pattern>
   </servlet-mapping>
 
 

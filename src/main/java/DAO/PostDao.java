@@ -108,6 +108,57 @@ public class PostDao {
 
         return postList;
     }
+
+    public List<NewPost> findAllMyPosts(String userLogin) {
+        List<NewPost> myPostList = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.createConnection();
+
+            String selectQuery = "SELECT * FROM post WHERE user_login=? ";
+            preparedStatement = connection.prepareStatement(selectQuery);
+            preparedStatement.setString(1,userLogin);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String postId = resultSet.getString("id");
+                String title = resultSet.getString("title");
+                String content = resultSet.getString("content");
+                Timestamp creationTimestamp = resultSet.getTimestamp("creation_date");
+
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                String creationDate = outputFormat.format(inputFormat.parse(creationTimestamp.toString()));
+
+                NewPost post = new NewPost(postId, userLogin, creationDate, title, content);
+                myPostList.add(post);
+            }
+
+        } catch (SQLException | ParseException e) {
+            e.printStackTrace();
+        } finally {
+            // Закрываем ресурсы
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // Обработка ошибок закрытия ресурсов
+                e.printStackTrace();
+            }
+        }
+
+        return myPostList;
+    }
     public NewPost findPostById(int postId) {
         NewPost post = null;
         Connection connection = null;
@@ -156,6 +207,62 @@ public class PostDao {
         }
 
         return post;
+    }
+
+    public String deletePostById(int postId, String authorLogin) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = DBConnection.createConnection();
+
+            String selectQuery = "SELECT user_login FROM post WHERE id = ?";
+            preparedStatement = connection.prepareStatement(selectQuery);
+            preparedStatement.setInt(1, postId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String userLoginInDb = resultSet.getString("user_login");
+                if (authorLogin.equals(userLoginInDb)) {
+                    // Пост принадлежит указанному автору, выполняем удаление
+                    String deleteCommentsQuery = "DELETE FROM comments WHERE post_id = ?";
+                    PreparedStatement deleteCommentsStatement = connection.prepareStatement(deleteCommentsQuery);
+                    deleteCommentsStatement.setInt(1, postId);
+                    deleteCommentsStatement.executeUpdate();
+
+                    String deletePostQuery = "DELETE FROM post WHERE id = ?";
+                    preparedStatement = connection.prepareStatement(deletePostQuery);
+                    preparedStatement.setInt(1, postId);
+                    int rowsDeleted = preparedStatement.executeUpdate();
+
+                    if (rowsDeleted > 0) {
+                        return "Пост успешно удален";
+                    } else {
+                        return "Не удалось удалить пост";
+                    }
+                } else {
+                    return ("Вы не являетесь автором");
+                }
+            } else {
+                return ("Пост с таким id не найден");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Закрываем ресурсы
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // Обработка ошибок закрытия ресурсов
+                e.printStackTrace();
+            }
+        }
+        return "Конкретная ошибка";
     }
 }
 

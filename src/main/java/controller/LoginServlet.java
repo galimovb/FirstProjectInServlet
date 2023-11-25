@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /*
-    Сервлет нужен просто для отображения страницы регистрации
+    Сервлет нужен просто для отображения страницы регистрации при запросе
  */
 
 public class LoginServlet extends HttpServlet {

@@ -10,18 +10,16 @@ import model.NewPost;
 
 import java.io.IOException;
 import java.util.List;
-/*
-Этот сервлет нам нужен для отображения домашней страницы и также для отображения всех постов
-*/
-public class HomePageServlet extends HttpServlet {
+
+public class MyPostPageServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
 
+        String userLogin = (String) session.getAttribute("userlogin");
+
         PostDao postDao = new PostDao();
-        List<NewPost> postList = postDao.findAllPosts();
-        session.setAttribute("posts", postList);
-
-        request.getRequestDispatcher("homepage.ftl").forward(request,response);
-
+        List<NewPost> myPostList = postDao.findAllMyPosts(userLogin);
+        session.setAttribute("myposts", myPostList);
+        request.getRequestDispatcher("mypost.ftl").forward(request,response);
     }
 }

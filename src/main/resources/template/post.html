@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    .post-block {
+        width: 500px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .post-title {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .post-id {
+        float: left;
+        font-size: 12px;
+        color: #999;
+        margin-top: 10px;
+    }
+
+    .post-date {
+        float: right;
+        font-size: 12px;
+        color: #999;
+        margin-top: 10px;
+    }
+
+    .post-content {
+        border: 1px solid #ccc;
+        padding: 10px 0;
+        color: #555;
+        margin-top: 30px;
+    }
+
+    .post-user-login {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    .view-comments {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="post-block">
+    <div class="post-title"> ${post.title}</div>
+    <div class="post-id"> ${post.id}</div>
+    <div class="post-date">${post.dateToRelease}</div>
+    <div class="post-content">${post.content}</div>
+    <div class="post-user-login">Автор: ${post.user_login}</div>
+    <form action="commentPage" method="get" class="view-comments">
+        <input type="hidden" name="postId" value="${post.id}">
+        <input type="submit" value="Комментарии">
+    </form>
+</div>
+
+</body>
+</html>

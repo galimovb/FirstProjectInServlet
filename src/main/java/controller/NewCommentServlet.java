@@ -12,7 +12,11 @@ import model.NewPost;
 
 import java.io.IOException;
 import java.util.List;
-
+/*
+* Этот сервлет нужен для отображения страницы создания нового комментария
+* и для сохранения нового комментария в бд
+*
+* */
 public class NewCommentServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("homepage.ftl").forward(request,response);
@@ -30,8 +34,10 @@ public class NewCommentServlet extends HttpServlet {
         comment.setPost_id(postId);
         comment.setContent(comment_content);
         String commSendStatus = commentDao.sendCommentToDb(comment);
+
         if(commSendStatus.equals("SUCCESS")) {
-            response.sendRedirect(request.getContextPath() + "/comments.ftl");
+            response.sendRedirect(request.getContextPath()+"/commentPage?postId="+postId);
+        }
         }
     }
-}
+

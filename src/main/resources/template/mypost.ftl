@@ -14,11 +14,11 @@
             padding: 0;
             margin: 0;
         }
-        .post_container {
+        .mypost_container {
             list-style-type: none;
         }
 
-        .post_one {
+        .mypost_one {
             margin-bottom: 20px;
         }
         .post-block {
@@ -63,6 +63,20 @@
         .view-comments {
             margin-top: 20px;
         }
+        .view-comments input[type="submit"] {
+            background-color: blue;
+            color: white;
+            border: none;
+
+        }
+        .delete-button {
+            margin-top: 20px;
+        }
+        .delete-button input[type="submit"] {
+            background-color: blue;
+            color: white;
+            border: none;
+        }
 
 
         .new-post-link {
@@ -71,6 +85,8 @@
             text-align: center;
             color: green;
         }
+
+
         .navbar{
             width:100%;
             height:50px;
@@ -80,15 +96,12 @@
             margin: 0;
 
         }
-
         .navbar .container{
             height:inherit;
             display:flex;
             justify-content: space-between;
             align-items:center;
             margin-right: 100px;
-
-
 
         }
         .navbar-menu{
@@ -130,26 +143,29 @@
             <div class = "navbar-wrap">
                 <ul class = "navbar-menu">
                     <li><a href = "profile.ftl">Мой профиль</a></li>
-                    <li><a href = "myPost">Мои посты</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 </div>
-<ul class="post_container">
-    <#list posts as post>
-        <li class = "post_one">
+<ul class="mypost_container">
+    <#list myposts as mypost>
+        <li class = "mypost_one">
             <div class="post-block">
-                <div class="post-title"> ${post.title}</div>
-                <div class="post-id"> ${post.id}</div>
-                <div class="post-date">${post.dateToRelease}</div>
-                <div class="post-content">${post.content}</div>
-                <div class="post-user-login">Автор: ${post.user_login}</div>
+                <div class="post-title"> ${mypost.title}</div>
+                <div class="post-id"> ${mypost.id}</div>
+                <div class="post-date">${mypost.dateToRelease}</div>
+                <div class="post-content">${mypost.content}</div>
+                <div class="post-user-login">Автор: ${mypost.user_login}</div>
                 <form action="commentPage" method="get" class="view-comments">
-                    <input type="hidden" name="postId" value="${post.id}">
+                    <input type="hidden" name="postId" value="${mypost.id}">
                     <input type="submit" value="Комментарии">
                 </form>
-
+                <form action="deletePost" method="post" class="delete-button">
+                    <input type="hidden" name="postId" value="${mypost.id}">
+                    <input type="hidden" name="author" value="${mypost.user_login}">
+                    <input type="submit" value="Удалить пост">
+                </form>
             </div>
         </li>
     </#list>
