@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="src/main/resources/css/headerstyle.css">
+    <link rel="stylesheet" href="C:\Users\galim\IdeaProjects\miproject\src\main\webapp\resources\css\homePagestyles.css">
     <style>
         body{
             position: relative;
@@ -119,6 +120,28 @@
             margin-left: 100px;
 
         }
+        .new-post-link{
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+            background-color: blue;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-bottom: 30px;
+            margin-top: 30px;
+        }
+        .go-to_relations{
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 30px;
+        }
+        .no-post_message{
+            text-align: center;
+            margin-top: 80px;
+        }
     </style>
 </head>
 <body>
@@ -129,31 +152,39 @@
 
             <div class = "navbar-wrap">
                 <ul class = "navbar-menu">
-                    <li><a href = "profile.ftl">Мой профиль</a></li>
+                    <li><a href = "profile">Мой профиль</a></li>
                     <li><a href = "myPost">Мои посты</a></li>
+                    <li><a href = "exit">Выйти</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 </div>
+<h2 class="go-to_relations">Присоединяйтесь к общению!</h2>
+<a href="createPost" class="new-post-link">Создать новый пост</a>
 <ul class="post_container">
-    <#list posts as post>
-        <li class = "post_one">
-            <div class="post-block">
-                <div class="post-title"> ${post.title}</div>
-                <div class="post-id"> ${post.id}</div>
-                <div class="post-date">${post.dateToRelease}</div>
-                <div class="post-content">${post.content}</div>
-                <div class="post-user-login">Автор: ${post.user_login}</div>
-                <form action="commentPage" method="get" class="view-comments">
-                    <input type="hidden" name="postId" value="${post.id}">
-                    <input type="submit" value="Комментарии">
-                </form>
-
-            </div>
-        </li>
-    </#list>
+    <#if posts?size == 0>
+        <h2 class="no-post_message">Еще нет постов. Создайте первый!</h2>
+    <#else>
+        <ul>
+            <#list posts as post>
+                <li class="post_one">
+                    <div class="post-block">
+                        <div class="post-title">${post.title}</div>
+                        <div class="post-id">${post.id}</div>
+                        <div class="post-date">${post.dateToRelease}</div>
+                        <div class="post-content">${post.content}</div>
+                        <div class="post-user-login">Автор: ${post.user_login}</div>
+                        <form action="commentPage" method="get" class="view-comments">
+                            <input type="hidden" name="postId" value="${post.id}">
+                            <input type="submit" value="Комментарии">
+                        </form>
+                    </div>
+                </li>
+            </#list>
+        </ul>
+    </#if>
 </ul>
-<a href="new_post.ftl" class="new-post-link">Создать новый пост</a>
+
 </body>
 </html>

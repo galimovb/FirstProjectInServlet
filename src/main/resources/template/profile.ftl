@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <title>Профиль</title>
     <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
         .profileContainer {
             max-width: 400px;
             margin: 0 auto;
@@ -44,6 +48,52 @@
             color: blue;
             cursor: pointer;
         }
+        .navbar{
+            width:100%;
+            height:50px;
+            box-shadow: 0 4px 10px rgba(0,0,0, .1);
+            background-color: mediumpurple;
+            padding: 0;
+            margin: 0;
+
+        }
+
+        .navbar .container{
+            height:inherit;
+            display:flex;
+            justify-content: space-between;
+            align-items:center;
+            margin-right: 100px;
+
+
+
+        }
+        .navbar-menu{
+            list-style-type:none ;
+            padding-left: 0;
+            margin-bottom:0;
+
+        }
+        .navbar-menu li{
+            display:inline-block;
+            color: black;
+            opacity: 0.8;
+            text-decoration: none;
+        }
+        .navbar-menu li a{
+            display:inline-block;
+            color: black;
+            opacity: 0.8;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 18px;
+        }
+        .navbar-brand{
+            font-weight: 700;
+            font-size: 30px;
+            text-decoration: none;
+            color:black;
+            margin-left: 100px;}
     </style>
     <script>
         function togglePassword() {
@@ -63,7 +113,21 @@
 
     </script>
 </head>
+<div>
+    <nav class = "navbar">
+        <div class = "container">
+            <a href = "#" class = "navbar-brand">Forum</a>
 
+            <div class = "navbar-wrap">
+                <ul class = "navbar-menu">
+                    <li><a href = "homePage">Главная страница</a></li>
+                    <li><a href = "myPost">Мои посты</a></li>
+                    <li><a href = "exit">Выйти</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
 <body>
 <div id="profileContainer" class="profileContainer">
     <h3>Ваш профиль</h3>

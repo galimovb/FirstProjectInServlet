@@ -24,23 +24,27 @@ public class RegistrationServlet extends HttpServlet {
         String login = request.getParameter("userlogin");
         String email = request.getParameter("useremail");
         String password = request.getParameter("password");
+        String repeat_password = request.getParameter("repeat_password");
+        if(repeat_password.equals(password)) {
+            UserReg userReg = new UserReg();
+            userReg.setFullName(fullname);
+            userReg.setLogin(login);
+            userReg.setEmail(email);
+            userReg.setPassword(password);
 
-        UserReg userReg = new UserReg();
-        userReg.setFullName(fullname);
-        userReg.setLogin(login);
-        userReg.setEmail(email);
-        userReg.setPassword(password);
 
+            UserRegDao userRegDao = new UserRegDao();
+            String userRegStatus = userRegDao.sendUserToDb(userReg);
 
-        UserRegDao userRegDao = new UserRegDao();
-        response.setContentType("text/html");
-        String userRegStatus = userRegDao.sendUserToDb(userReg);
-
-        if(userRegStatus.equals("SUCCESS")){
-            response.sendRedirect(request.getContextPath() + "/login");
-        }else if(userRegStatus.equals("User with the same email already exists") || userRegStatus.equals("User with the same login already exists")){
-            request.setAttribute("error", "Пользователь с таким логином или почтой существует");
-            request.getRequestDispatcher("registration.ftl").forward(request,response);
+            if (userRegStatus.equals("SUCCESS")) {
+                response.sendRedirect(request.getContextPath() + "/login");
+            } else if (userRegStatus.equals("User with the same email already exists") || userRegStatus.equals("User with the same login already exists")) {
+                request.setAttribute("error", "Пользователь с таким логином или почтой существует");
+                request.getRequestDispatcher("registration.ftl").forward(request, response);
+            }
+        }else{
+            request.setAttribute("error", "Введенные пароли не совпадают");
+            request.getRequestDispatcher("registration.ftl").forward(request, response);
         }
     }
 }

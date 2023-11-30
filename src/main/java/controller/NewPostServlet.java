@@ -1,6 +1,7 @@
 package controller;
 
 import DAO.PostDao;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,6 +15,9 @@ import java.io.IOException;
 * пользователя на домашнюю страницу где отображаются все посты и весь остальной функционал
 * */
 public class NewPostServlet extends HttpServlet {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.getRequestDispatcher("new_post.ftl").forward(request,response);
+    }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
 

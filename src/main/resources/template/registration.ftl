@@ -45,8 +45,13 @@
             </div>
 
             <div class="mb-3">
-                <label for="password" class="form-label">Пароль:</label>
+                <label for="password" class="form-label">Придумайте пароль:</label>
                 <input type="password" id="password" name="password" required class="form-control" placeholder="Введите пароль">
+            </div>
+
+            <div class="mb-3">
+                <label for="repeat_password" class="form-label">Повторите пароль:</label>
+                <input type="password" id="repeat_password" name="repeat_password" required class="form-control" placeholder="Введите пароль">
             </div>
 
             <input type="submit" value="Зарегистрироваться" class="btn btn-primary">

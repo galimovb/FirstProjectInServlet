@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter("/*")
+
 public class AuthentificationFilter implements Filter {
 
 
@@ -23,6 +23,7 @@ public class AuthentificationFilter implements Filter {
         if (httpServletRequest.getServletPath().equals("/usercheck")
                 || httpServletRequest.getServletPath().equals("/register")
                 || httpServletRequest.getServletPath().equals("/login")
+                || httpServletRequest.getServletPath().equals("/homePage")
                 || httpServletRequest.getServletPath().startsWith("/resources")
         ) {
             System.out.println("user_check");
@@ -39,7 +40,7 @@ public class AuthentificationFilter implements Filter {
                 //Передаем управление следующему фильтру
                 chain.doFilter(request, response);
             } else {
-                request.getRequestDispatcher("/login").forward(request, response);
+                request.getRequestDispatcher("login.ftl").forward(request,response);
 
             }
         }
@@ -47,6 +48,6 @@ public class AuthentificationFilter implements Filter {
 
     @Override
     public void destroy() {
-        //Filter.super.destroy();
+       // Filter.super.destroy();
     }
 }

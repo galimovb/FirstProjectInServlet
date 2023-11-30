@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Новый пост</title>
+    <link rel="stylesheet" href="/miproject_war/resources/css/headerstyle.css">
 
 </head>
 

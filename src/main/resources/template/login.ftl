@@ -44,7 +44,7 @@
         </form>
     </div>
     <div style="text-align: center; margin-top: 20px;">
-        <a href="registration.ftl">Ещё не зарегистрированы? Зарегистрироваться</a>
+        <a href="register">Ещё не зарегистрированы? Зарегистрироваться</a>
     </div>
 </div>
 

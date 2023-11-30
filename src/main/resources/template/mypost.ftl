@@ -1,8 +1,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="src/main/resources/css/headerstyle.css">
+    <title>Мои посты</title>
+
     <style>
         body{
             position: relative;
@@ -80,10 +80,17 @@
 
 
         .new-post-link {
-            margin-top: 20px;
             display: block;
+            width: fit-content;
+            margin: 0 auto;
+            background-color: blue;
+            color: white;
             text-align: center;
-            color: green;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 30px;
+            margin-bottom: 30px;
         }
 
 
@@ -132,6 +139,11 @@
             margin-left: 100px;
 
         }
+        .no-post_message{
+            text-align: center;
+            font-style: italic;
+            margin-top: 40px;
+        }
     </style>
 </head>
 <body>
@@ -143,32 +155,38 @@
             <div class = "navbar-wrap">
                 <ul class = "navbar-menu">
                     <li><a href = "profile.ftl">Мой профиль</a></li>
+                    <li><a href = "homePage">Главная страница</a></li>
+                    <li><a href = "exit">Выйти</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 </div>
 <ul class="mypost_container">
-    <#list myposts as mypost>
-        <li class = "mypost_one">
-            <div class="post-block">
-                <div class="post-title"> ${mypost.title}</div>
-                <div class="post-id"> ${mypost.id}</div>
-                <div class="post-date">${mypost.dateToRelease}</div>
-                <div class="post-content">${mypost.content}</div>
-                <div class="post-user-login">Автор: ${mypost.user_login}</div>
-                <form action="commentPage" method="get" class="view-comments">
-                    <input type="hidden" name="postId" value="${mypost.id}">
-                    <input type="submit" value="Комментарии">
-                </form>
-                <form action="deletePost" method="post" class="delete-button">
-                    <input type="hidden" name="postId" value="${mypost.id}">
-                    <input type="hidden" name="author" value="${mypost.user_login}">
-                    <input type="submit" value="Удалить пост">
-                </form>
-            </div>
-        </li>
-    </#list>
+    <#if myposts?size == 0>
+            <div class="no-post_message">Вы еще не создали ни одного поста</div>
+    <#else>
+        <#list myposts as mypost>
+            <li class = "mypost_one">
+                <div class="post-block">
+                    <div class="post-title"> ${mypost.title}</div>
+                    <div class="post-id"> ${mypost.id}</div>
+                    <div class="post-date">${mypost.dateToRelease}</div>
+                    <div class="post-content">${mypost.content}</div>
+                    <div class="post-user-login">Автор: ${mypost.user_login}</div>
+                    <form action="commentPage" method="get" class="view-comments">
+                        <input type="hidden" name="postId" value="${mypost.id}">
+                        <input type="submit" value="Комментарии">
+                    </form>
+                    <form action="deletePost" method="post" class="delete-button">
+                        <input type="hidden" name="postId" value="${mypost.id}">
+                        <input type="hidden" name="author" value="${mypost.user_login}">
+                        <input type="submit" value="Удалить пост">
+                    </form>
+                </div>
+            </li>
+        </#list>
+    </#if>
 </ul>
 <a href="new_post.ftl" class="new-post-link">Создать новый пост</a>
 </body>
