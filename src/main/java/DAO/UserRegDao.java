@@ -58,22 +58,6 @@ public class UserRegDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            // Закрываем ресурсы
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // Обработка ошибок закрытия ресурсов
-                e.printStackTrace();
-            }
         }
 
         return "Oops.. Something went wrong there..!";

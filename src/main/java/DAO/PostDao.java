@@ -37,23 +37,8 @@ public class PostDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            // Закрываем ресурсы
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // Обработка ошибок закрытия ресурсов
-                e.printStackTrace();
-            }
         }
+
 
         return "Oops.. Something went wrong there..!";
     }
@@ -88,22 +73,6 @@ public class PostDao {
 
         } catch (SQLException | ParseException e) {
             e.printStackTrace();
-        } finally {
-            // Закрываем ресурсы
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // Обработка ошибок закрытия ресурсов
-                e.printStackTrace();
-            }
         }
 
         return postList;
@@ -139,22 +108,6 @@ public class PostDao {
 
         } catch (SQLException | ParseException e) {
             e.printStackTrace();
-        } finally {
-            // Закрываем ресурсы
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // Обработка ошибок закрытия ресурсов
-                e.printStackTrace();
-            }
         }
 
         return myPostList;
@@ -188,22 +141,6 @@ public class PostDao {
 
         } catch (SQLException | ParseException e) {
             e.printStackTrace();
-        } finally {
-            // Закрываем ресурсы
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // Обработка ошибок закрытия ресурсов
-                e.printStackTrace();
-            }
         }
 
         return post;
@@ -248,19 +185,6 @@ public class PostDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            // Закрываем ресурсы
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // Обработка ошибок закрытия ресурсов
-                e.printStackTrace();
-            }
         }
         return "Конкретная ошибка";
     }

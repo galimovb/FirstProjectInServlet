@@ -1,26 +1,8 @@
-
 <html>
 <head>
     <title>Авторизация</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #fff;
-        }
-
-        .form-block {
-            max-width: 400px;
-            margin: 0 auto;
-            margin-top: 100px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .form-control::placeholder {
-            opacity: 0.6;
-        }
-    </style>
+    <link rel="stylesheet" href="/miproject/resources/css/login-registr-page-style.css" type="text/css">
 </head>
 <body>
 <h3 style="text-align: center;color: red; margin-top: 40px">${message!""}</h3>
@@ -42,10 +24,11 @@
 
             <input type="submit" value="Войти" class="btn btn-primary">
         </form>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="register">Ещё не зарегистрированы? Зарегистрироваться</a>
+        </div>
     </div>
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="register">Ещё не зарегистрированы? Зарегистрироваться</a>
-    </div>
+
 </div>
 
 </body>
